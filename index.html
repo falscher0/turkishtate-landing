@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Turkish Tate | Matrix'ten Çık</title>
+  <meta name="description" content="Para kazanmak bir beceridir. Matrix'ten çıkmak ise bir karardır. The Real World ve Turkish Tate premium eğitim ekosistemi." />
+  <meta property="og:title" content="Turkish Tate | Matrix'ten Çık" />
+  <meta property="og:description" content="Para kazanmak bir beceridir. Matrix'ten çıkmak ise bir karardır." />
+  <meta name="theme-color" content="#030303" />
+
+  <style>
+    :root{
+      --bg:#030303;
+      --bg2:#070707;
+      --card:#101010;
+      --card2:#151515;
+      --gold:#c9a227;
+      --gold2:#f2d16b;
+      --text:#f5f5f5;
+      --muted:#a9a9a9;
+      --line:rgba(201,162,39,.28);
+      --soft:rgba(255,255,255,.08);
+      --danger:#d85757;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      background:var(--bg);
+      color:var(--text);
+      font-family:Arial,Helvetica,sans-serif;
+      line-height:1.6;
+      overflow-x:hidden;
+    }
+    a{text-decoration:none;color:inherit}
+    img{max-width:100%;display:block}
+    .container{width:92%;max-width:1180px;margin:auto}
+
+    .progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold2));z-index:999}
+    .loader{position:fixed;inset:0;background:#000;z-index:998;display:flex;align-items:center;justify-content:center;animation:hideLoader 1.2s ease forwards;animation-delay:1s}
+    .loader span{color:var(--gold);letter-spacing:5px;font-weight:900;font-size:18px;animation:pulse 1s infinite alternate}
+    @keyframes hideLoader{to{opacity:0;visibility:hidden}}
+    @keyframes pulse{from{opacity:.35}to{opacity:1}}
+
+    .nav{position:fixed;top:0;left:0;width:100%;z-index:80;background:rgba(3,3,3,.68);backdrop-filter:blur(18px);border-bottom:1px solid var(--soft)}
+    .nav-inner{height:72px;display:flex;align-items:center;justify-content:space-between}
+    .logo{font-weight:950;color:var(--gold);letter-spacing:1.5px}
+    .nav-links{display:flex;gap:24px;color:#ddd;font-size:14px}
+    .nav-links a{transition:.25s}
+    .nav-links a:hover{color:var(--gold)}
+
+    section{position:relative;padding:112px 0}
+    .hero{min-height:100vh;display:flex;align-items:center;text-align:center;padding-top:110px;background:
+      radial-gradient(circle at 50% 0%,rgba(201,162,39,.22),transparent 35%),
+      radial-gradient(circle at 88% 70%,rgba(255,255,255,.06),transparent 28%),#030303}
+    .noise{position:absolute;inset:0;pointer-events:none;opacity:.055;background-image:linear-gradient(90deg,#fff 1px,transparent 1px),linear-gradient(#fff 1px,transparent 1px);background-size:62px 62px;mask-image:linear-gradient(to bottom,black,transparent)}
+    .eyebrow{display:inline-block;color:var(--gold);border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:14px;margin-bottom:24px;background:rgba(201,162,39,.05)}
+    h1{font-size:clamp(54px,10vw,132px);line-height:.86;letter-spacing:-5px;margin-bottom:24px;font-weight:950}
+    h2{font-size:clamp(38px,6vw,82px);line-height:.95;letter-spacing:-3px;margin-bottom:20px;font-weight:950}
+    h3{font-size:24px;margin-bottom:12px}
+    .gold{color:var(--gold)}
+    .lead{max-width:790px;margin:0 auto 34px;color:#c9c9c9;font-size:clamp(17px,2.4vw,21px)}
+    .center{text-align:center}
+
+    .video-frame{max-width:920px;margin:36px auto 0;border-radius:32px;overflow:hidden;border:1px solid var(--line);background:#0b0b0b;box-shadow:0 0 90px rgba(201,162,39,.14)}
+    .video-frame iframe{width:100%;aspect-ratio:16/9;border:0;display:block}
+    .warning{max-width:760px;margin:34px auto 0;border:1px solid var(--line);border-radius:22px;padding:24px;background:rgba(201,162,39,.06);color:#ddd}
+    .scroll{margin-top:34px;color:#777;font-size:13px;letter-spacing:3px}
+
+    .cinema{min-height:90vh;display:flex;align-items:center;background:#000;text-align:center}
+    .big-text{font-size:clamp(42px,8vw,110px);line-height:.9;letter-spacing:-4px;font-weight:950}
+
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:stretch}
+    .panel{background:linear-gradient(180deg,#111,#070707);border:1px solid var(--soft);border-radius:28px;padding:34px;min-height:260px;transition:.25s}
+    .panel:hover{transform:translateY(-6px);border-color:var(--line)}
+    .timeline{display:grid;gap:15px;margin-top:24px}
+    .step{border:1px solid var(--soft);background:#0d0d0d;padding:16px 18px;border-radius:16px;color:#d8d8d8;text-align:center}
+
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+    .card{background:linear-gradient(180deg,#111,#070707);border:1px solid var(--soft);border-radius:24px;padding:28px;transition:.25s ease;position:relative;overflow:hidden}
+    .card:before{content:"";position:absolute;inset:-1px;background:radial-gradient(circle at top left,rgba(201,162,39,.16),transparent 35%);opacity:0;transition:.25s}
+    .card:hover{transform:translateY(-7px);border-color:var(--line)}
+    .card:hover:before{opacity:1}
+    .card>*{position:relative}
+    .card h3{color:var(--gold)}
+    .card p,.card li{color:#c8c8c8}
+
+    .quote-section{background:radial-gradient(circle at center,rgba(201,162,39,.13),transparent 38%),#050505;text-align:center}
+    .trw-box{border:1px solid var(--line);border-radius:36px;padding:44px;background:radial-gradient(circle at top left,rgba(201,162,39,.18),transparent 32%),linear-gradient(180deg,#101010,#050505);box-shadow:0 0 80px rgba(201,162,39,.09)}
+    .trw-layout{display:grid;grid-template-columns:1.15fr .85fr;gap:34px;align-items:center}
+    .module-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:13px;margin-top:22px}
+    .module{padding:14px 16px;border-radius:14px;border:1px solid var(--soft);background:#0d0d0d;color:#ddd}
+
+    .masonry{columns:2 360px;column-gap:22px;margin-top:30px}
+    .shot{break-inside:avoid;border:1px solid var(--line);border-radius:22px;background:#0d0d0d;margin-bottom:22px;overflow:hidden;box-shadow:0 0 35px rgba(201,162,39,.08);transition:.25s}
+    .shot:hover{transform:scale(1.015);box-shadow:0 0 55px rgba(201,162,39,.15)}
+    .shot img{width:100%;display:block}
+
+    .testimonial-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:30px}
+    .testimonial{background:linear-gradient(180deg,#111,#070707);border:1px solid var(--soft);border-radius:24px;padding:28px;transition:.25s;position:relative;overflow:hidden}
+    .testimonial:before{content:"⭐";position:absolute;right:22px;top:18px;color:var(--gold);opacity:.55}
+    .testimonial:hover{transform:translateY(-6px);border-color:var(--line)}
+    .testimonial p{color:#ddd;font-size:18px;padding-right:20px}
+    .testimonial strong{display:block;color:var(--gold);margin-top:18px}
+
+    .path-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
+    .path{background:#101010;border:1px solid var(--soft);border-radius:22px;padding:24px;transition:.25s}
+    .path:hover{transform:translateY(-5px);border-color:var(--line)}
+    .path.featured{border-color:var(--line);background:radial-gradient(circle at top,rgba(201,162,39,.13),transparent 45%),#101010}
+    .path h3{color:var(--gold)}
+    .path ul{padding-left:18px;color:#ccc}
+
+    .faq{max-width:920px;margin:auto}
+    details{background:#101010;border:1px solid var(--soft);border-radius:18px;margin-bottom:14px;overflow:hidden}
+    summary{padding:22px;cursor:pointer;font-weight:800}
+    details p{padding:0 22px 22px;color:#bbb}
+
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:40px 0}
+    .stat{border:1px solid var(--line);background:#101010;border-radius:22px;padding:30px;text-align:center}
+    .stat strong{display:block;font-size:46px;color:var(--gold);line-height:1;margin-bottom:8px}
+    .buttons{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:28px}
+    .btn{padding:18px 30px;border-radius:15px;font-weight:950;display:inline-block;transition:.25s;letter-spacing:.3px}
+    .btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;box-shadow:0 0 35px rgba(201,162,39,.22)}
+    .btn-secondary{background:#111;border:1px solid #333;color:#fff}
+    .btn:hover{transform:translateY(-4px);opacity:.92}
+
+    footer{border-top:1px solid var(--soft);padding:35px 0;text-align:center;color:#777;background:#030303}
+    .reveal{opacity:0;transform:translateY(30px);transition:1s ease}
+    .reveal.show{opacity:1;transform:none}
+
+    @media(max-width:900px){
+      .nav-links{display:none}
+      h1{letter-spacing:-3px}
+      .split,.grid,.trw-layout,.path-grid,.stats,.testimonial-grid{grid-template-columns:1fr}
+      .hero{padding-top:110px}
+      section{padding:78px 0}
+      .trw-box{padding:28px}
+      .buttons{flex-direction:column}
+      .btn{width:100%;text-align:center}
+    }
+  </style>
+</head>
+
+<body id="top">
+<div class="progress" id="progress"></div>
+<div class="loader"><span>TURKISH TATE</span></div>
+
+<nav class="nav">
+  <div class="container nav-inner">
+    <a class="logo" href="#top">TURKISH TATE</a>
+    <div class="nav-links">
+      <a href="#matrix">Matrix</a>
+      <a href="#trw">The Real World</a>
+      <a href="#results">Başarılar</a>
+      <a href="#courses">Kurslar</a>
+      <a href="#faq">SSS</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="noise"></div>
+  <div class="container reveal">
+    <div class="eyebrow">100K+ global öğrenci • Sınırsız erişim • Türkçe altyazı • Hızlı destek</div>
+    <h1>MATRİXTEN <span class="gold">ÇIK.</span></h1>
+    <p class="lead">Para kazanmak bir beceridir. Matrix'ten çıkmak ise bir karardır.</p>
+
+    <div class="video-frame">
+      <iframe src="https://player.vimeo.com/video/1200879559?badge=0&autopause=0&player_id=0&app_id=58479" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" allowfullscreen></iframe>
+    </div>
+
+    <div class="warning"><strong>⚠️ Bu sayfa herkese göre değildir.</strong><br>Konfor alanında kalmak istiyorsan şimdi çıkabilirsin.</div>
+    <div class="scroll">KAYDIR ↓</div>
+  </div>
+</header>
+
+<section class="cinema" id="matrix">
+  <div class="container reveal">
+    <div class="big-text">HERKES<br><span class="gold">PARA KAZANMAK</span><br>İSTİYOR.</div>
+    <p class="lead" style="margin-top:28px;">Ama çok azı bunun öğrenilebilir bir beceri olduğunu anlıyor.</p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="split">
+      <div class="panel reveal">
+        <h2>Matrix'in <span class="gold">Yolu</span></h2>
+        <div class="timeline">
+          <div class="step">Alarm<br>↓</div><div class="step">İş<br>↓</div><div class="step">Yorgunluk<br>↓</div><div class="step">Telefon<br>↓</div><div class="step">Uyu<br>↓</div><div class="step">Tekrar</div>
+        </div>
+      </div>
+      <div class="panel reveal">
+        <h2>Bizim <span class="gold">Yolumuz</span></h2>
+        <div class="timeline">
+          <div class="step">Öğren<br>↓</div><div class="step">Uygula<br>↓</div><div class="step">Kazan<br>↓</div><div class="step">Yatırım Yap<br>↓</div><div class="step">Zamanını geri al, özgür ol</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="quote-section">
+  <div class="container reveal">
+    <h2>BELKİ DE PROBLEM...</h2>
+    <p class="lead">Bilgi eksikliğin değil.<br>Potansiyel eksikliğin değil.<br>Cesaret eksikliğin değil.</p>
+    <div class="big-text">PROBLEM<br><span class="gold">HER GÜN AYNI</span><br>DÖNGÜYÜ YAŞAMAN.</div>
+  </div>
+</section>
+
+<section>
+  <div class="container reveal">
+    <h2>Bu <span class="gold">Sen misin?</span></h2>
+    <p class="lead">Eğer birkaçına “evet” diyorsan, doğru yerdesin.</p>
+    <div class="grid">
+      <div class="card"><h3>⌛ Erteliyorsun</h3><p>Daha fazlasını yapabileceğini hissediyorsun ama başlayamıyorsun.</p></div>
+      <div class="card"><h3>💸 Para Kaygısı</h3><p>Finansal özgürlük istiyorsun ama hangi beceriden başlayacağını bilmiyorsun.</p></div>
+      <div class="card"><h3>🧠 Sistem Eksikliği</h3><p>Motivasyon arıyorsun ama seni ileri taşıyacak düzeni kuramıyorsun.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="trw">
+  <div class="container">
+    <div class="trw-box reveal">
+      <div class="trw-layout">
+        <div>
+          <div class="eyebrow">Ana odak</div>
+          <h2>THE REAL WORLD</h2>
+          <p class="lead" style="margin:0;">Modern ekonomide başarılı olmak isteyenler için beceri geliştirme odaklı bir öğrenme ekosistemi. Para kazanmak şans değildir; doğru sistem, doğru çevre ve sürekli uygulama ile geliştirilen bir beceridir.</p>
+          <div class="module-grid">
+            <div class="module">✍️ Copywriting</div><div class="module">🛒 E-Ticaret</div><div class="module">🌍 Freelance</div><div class="module">📈 Yatırım</div><div class="module">💬 Satış</div><div class="module">🧠 Disiplin</div><div class="module">👥 Network</div><div class="module">🔥 Uygulama</div>
+          </div>
+        </div>
+        <div>
+          <div class="video-frame" style="margin:0;">
+            <iframe src="https://player.vimeo.com/video/1200878504?badge=0&autopause=0&player_id=0&app_id=58479" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" allowfullscreen></iframe>
+          </div>
+          <div class="buttons"><a class="btn btn-primary" href="https://www.shopier.com/turkishtate/46640552" target="_blank">THE REAL WORLD'E KATIL</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="results">
+  <div class="container reveal">
+    <h2>Öğrenci <span class="gold">Sonuçları</span></h2>
+    <p class="lead">Global yorumlar ve Türkiye'den gelen premium geri bildirimler.</p>
+
+    <h3 class="gold">🌍 Global Başarı Hikayeleri</h3>
+    <div class="masonry">
+      <div class="shot"><img src="assets/results/global/global-01.webp" alt="Global öğrenci yorumu 1"></div>
+      <div class="shot"><img src="assets/results/global/global-02.webp" alt="Global öğrenci yorumu 2"></div>
+      <div class="shot"><img src="assets/results/global/global-03.webp" alt="Global öğrenci yorumu 3"></div>
+      <div class="shot"><img src="assets/results/global/global-04.webp" alt="Global öğrenci yorumu 4"></div>
+      <div class="shot"><img src="assets/results/global/global-05.webp" alt="Global öğrenci yorumu 5"></div>
+    </div>
+
+    <h3 class="gold" style="margin-top:60px;">🇹🇷 Türkiye'den Gelen Geri Bildirimler</h3>
+    <div class="testimonial-grid">
+      <div class="testimonial"><p>“İngilizcem olmadığı için çekiniyordum ama Türkçe altyazılar sayesinde rahat takip edebildim. İlk günden itibaren birçok şey kafamda netleşti.”</p><strong>— Turkish Tate Öğrencisi</strong></div>
+      <div class="testimonial"><p>“İlk günden itibaren kafamda birçok şey netleşti. Sürece güvendim ve ikinci haftadan itibaren ilk kazancımı elde etmeye başladım.”</p><strong>— Turkish Tate Öğrencisi</strong></div>
+      <div class="testimonial"><p>“Disiplinli çalışınca sonuç geliyor. İçerikler tamamen uygulamaya yönelik ve Türkçe çeviriler gerçekten kaliteli hazırlanmış.”</p><strong>— Turkish Tate Öğrencisi</strong></div>
+      <div class="testimonial"><p>“Dört aydır içerikleri düzenli uyguluyorum ve artık güzel gelirler elde etmeye başladım. Özellikle E-Ticaret Kampüsü bana çok büyük katkı sağladı.”</p><strong>— Turkish Tate Öğrencisi</strong></div>
+      <div class="testimonial"><p>“Sabırlı olup sistemi uygulayan herkesin karşılığını alacağını düşünüyorum. Önemli olan sürece güvenmek ve istikrarlı şekilde devam etmek.”</p><strong>— Turkish Tate Öğrencisi</strong></div>
+    </div>
+  </div>
+</section>
+
+<section id="courses">
+  <div class="container reveal">
+    <h2>Diğer <span class="gold">Kurslarımız</span></h2>
+    <p class="lead">Özenle Türkçe'ye çevirdiğimiz kurslarımızdan ihtiyacın olan kategoriyi bul ve doğru kursu seç.</p>
+    <div class="path-grid">
+      <div class="path featured"><h3>🚀 Girişimci Paket</h3><ul><li>The Real World</li><li>Hustler</li><li>G Mindset</li><li>Iron Mind</li><li>Fitness</li><li>Beden Dili</li><li>Kadın Psikolojisi</li></ul></div>
+      <div class="path"><h3>💰 Para Kazanmak</h3><ul><li>The Real World</li><li>Hustler University</li></ul></div>
+      <div class="path"><h3>🧠 Mental Güç</h3><ul><li>G Mindset</li><li>Iron Mind</li></ul></div>
+      <div class="path"><h3>❤️ Sosyal İlişkiler</h3><ul><li>Kadın Psikolojisi</li><li>Beden Dili</li></ul></div>
+      <div class="path"><h3>💪 Fizik</h3><ul><li>Fitness</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="container faq reveal">
+    <h2>Şüphelerin <span class="gold">Normal.</span></h2>
+    <p class="lead">Büyük kararlar almadan önce soru sormak akıllıca bir davranıştır.</p>
+    <details open><summary>Kurslar nasıl teslim ediliyor?</summary><p>Satın alma tamamlandıktan sonra dijital erişim bilgileri paylaşılır.</p></details>
+    <details><summary>Ödeme güvenli mi?</summary><p>Ödemeler Shopier altyapısı üzerinden güvenli şekilde gerçekleştirilir.</p></details>
+    <details><summary>İçerikler Türkçe mi?</summary><p>%100 Türkçe altyazılı ve anlaşılır içerikler sunulmaktadır.</p></details>
+    <details><summary>Satın aldıktan sonra ne oluyor?</summary><p>Ödeme onaylandıktan sonra erişim süreci başlar ve gerekli yönlendirmeler tarafına iletilir.</p></details>
+    <details><summary>Destek var mı?</summary><p>Herhangi bir teknik durumda hızlı destek sağlanmaktadır. Ömür boyu erişim garantisi bulunmaktadır.</p></details>
+    <details><summary>Program kadınlar için uygun mu?</summary><p>THE REAL WORLD, öğrenmek isteyen her birey için, cinsiyet fark etmeksizin uygundur. Ayrıca THE REAL WORLD çok büyük bir kadın üye kitlesine sahiptir.</p></details>
+    <details><summary>Paramı ne kadar sürede geri kazanırım?</summary><p>Bu, The Real World'ü ne kadar ciddiye aldığına bağlıdır. Birçok öğrenci parasını birkaç hafta içinde geri kazandı. Not: Öğretilen her şey eğitim amaçlıdır. Uygulamak ve çalışmayı yapmak öğrencinin kendisine kalmıştır. Herhangi bir kâr veya finansal başarı garantisi verilmez.</p></details>
+    <details><summary>TRW'ye girdikten sonra paraya ihtiyacım olacak mı?</summary><p>Şart değil. Birçok öğrenci Copywriting, Sosyal Medya, Müşteri Edinme ve İçerik Üretimi gibi sermaye gerektirmeyen alanlarla başlamaktadır.</p></details>
+    <details><summary>Öğrettiğiniz beceriler hakkında hiçbir şey bilmiyorum. Bu sorun mu?</summary><p>Hayır. Bu bir mentorluk programıdır. Buraya öğrenmek için geliyorsun. Dersleri ve rehberliği adım adım takip etmen yeterlidir.</p></details>
+    <details><summary>X ülkesinde yaşıyorum. Bu sorun mu?</summary><p>Hayır. The Real World'de para kazanma becerileri öğretilir; nerede yaşadığının önemi yoktur. Konumun yalnızca kazancının para birimini değiştirebilir.</p></details>
+    <details><summary>Çok fazla boş vaktim yok, yine de başvurabilir miyim?</summary><p>Öğretilen yöntemler hızlı uygulama için tasarlanmıştır. Günde en az 30 dakika ayırmak başlangıç için yeterlidir.</p></details>
+  </div>
+</section>
+
+<section class="cinema"><div class="container reveal"><div class="big-text">HAYATINI<br>DEĞİŞTİRECEK OLAN<br><span class="gold">BU SAYFA DEĞİL.</span></div></div></section>
+<section class="cinema"><div class="container reveal"><div class="big-text">BU SAYFAYI<br>KAPATTIKTAN SONRA<br><span class="gold">VERECEĞİN KARAR.</span></div></div></section>
+
+<section>
+  <div class="container reveal center">
+    <h2>Kendine <span class="gold">Yatırım Yap.</span></h2>
+    <p class="lead">Bir hafta sonra sıkılacağın şeylere değil, seni yıllarca ileri taşıyacak becerilere yatırım yap. Topluluğumuza katıl, kendini inşa et ve gerçek hayatta seviye atlayan kişi ol.</p>
+    <h2 style="margin-top:40px;">Para kazanmak bir beceridir.<br><span class="gold">Matrix'ten çıkmak ise bir karardır.</span></h2>
+    <div class="stats">
+      <div class="stat"><strong>100K+</strong>Global öğrenci</div><div class="stat"><strong>8</strong>Premium eğitim</div><div class="stat"><strong>∞</strong>Ömür boyu erişim</div>
+    </div>
+    <div class="buttons">
+      <a class="btn btn-primary" href="https://www.shopier.com/turkishtate" target="_blank">MAĞAZAYI ZİYARET ET</a>
+      <a class="btn btn-secondary" href="https://t.me/+gRaunPED4X1kZDY8" target="_blank">ÜCRETSİZ TELEGRAM TOPLULUĞU</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container"><strong class="gold">Turkish Tate</strong><br>Para kazanmak bir beceridir. Matrix'ten çıkmak ise bir karardır.<br>© 2026 Turkish Tate</div>
+</footer>
+
+<script>
+  const progress=document.getElementById('progress');
+  window.addEventListener('scroll',()=>{const total=document.documentElement.scrollHeight-window.innerHeight;progress.style.width=(window.scrollY/total)*100+'%'});
+  const reveals=document.querySelectorAll('.reveal');
+  const observer=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('show')}})},{threshold:.12});
+  reveals.forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
